@@ -16,3 +16,45 @@ create `.env.local` with `JWT_SECRET`.
 ```
 npm run dev
 ```
+
+## Project structure
+```
+task-dashboard/
+├── .env.local
+├── package.json
+├── tailwind.config.ts
+├── postcss.config.mjs
+├── tsconfig.json
+├── middleware.ts               # auth guard
+├── app/
+│   ├── layout.tsx
+│   ├── page.tsx                # landing / login
+│   ├── dashboard/
+│   │   └── page.tsx            # stats overview
+│   ├── tasks/
+│   │   ├── page.tsx            # task list (client)
+│   │   └── [id]/
+│   │       └── page.tsx        # edit task (dynamic route)
+│   ├── api/
+│   │   ├── auth/
+│   │   │   └── route.ts        # login mock
+│   │   ├── tasks/
+│   │   │   └── route.ts        # GET, POST
+│   │   └── tasks/[id]/
+│   │       └── route.ts        # PUT, DELETE
+│   └── globals.css
+├── components/
+│   ├── TaskForm.tsx
+│   ├── TaskList.tsx
+│   ├── Navbar.tsx
+│   └── Notification.tsx
+├── lib/
+│   ├── db.ts                   # in‑memory store
+│   ├── auth.ts                 # token helpers
+│   └── validations.ts          # Zod schemas
+├── hooks/
+│   ├── useAuth.ts
+│   └── useTasks.ts
+└── types/
+    └── index.ts
+```
