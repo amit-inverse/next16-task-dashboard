@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
-// import { verifyToken } from './lib/auth';
+import { verifyToken } from './lib/auth';
 
 const publicRoutes = ['/api/auth'];
 
@@ -14,11 +14,11 @@ export function middleware(request: NextRequest) {
     }
 
     // Protect everything else
-    // if (!token || !verifyToken(token)) {
-    //     const url = new URL('/', request.url);
-    //     url.searchParams.set('error', 'Unauthorized');
-    //     return NextResponse.redirect(url);
-    // }
+    if (!token || !verifyToken(token)) {
+        const url = new URL('/', request.url);
+        url.searchParams.set('error', 'Unauthorized');
+        return NextResponse.redirect(url);
+    }
 
     return NextResponse.next();
 }
