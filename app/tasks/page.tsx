@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-// import TaskList from '@/components/TaskList';
-// import TaskForm from '@/components/TaskForm';
+import TaskList from '@/components/TaskList';
+import TaskForm from '@/components/TaskForm';
 import { Task } from '@/lib/db';
 import toast from 'react-hot-toast';
 
@@ -81,8 +81,8 @@ export default function TaskPage() {
     return (
         <div className="space-y-8">
             <div className="text-3xl font-bold">Tasks</div>
-            {/* <TaskForm onSubmit={handleAddTask} />
-            <TaskList tasks={tasks} onUpdate={handleUpdateTask} onDelete={handleDeleteTask} /> */}
+            <TaskForm onSubmit={handleAddTask} />
+            <TaskList tasks={tasks} onUpdate={handleUpdateTask} onDelete={handleDeleteTask} />
         </div>
     );
 }
