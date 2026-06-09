@@ -2,11 +2,12 @@ import { NextResponse } from 'next/server';
 import { updateTask, deleteTask } from '@/lib/db';
 import { taskSchema } from '@/lib/validation';
 
-export async function PUT(request: Request, { params }: { params: { id: string } }) {
+export async function PUT(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
+        const { id } = await params;
         const body = await request.json();
         const validated = taskSchema.partial().parse(body); // Allow partial updates
-        const updated = updateTask(params.id, validated);
+        const updated = updateTask(id, validated);
         if (!updated) {
             return NextResponse.json({ error: 'Task not found' }, { status: 404 });
         }
@@ -16,8 +17,9 @@ export async function PUT(request: Request, { params }: { params: { id: string }
     }
 }
 
-export async function DELETE(request: Request, { params }: { params: { id: string } }) {
-    const deleted = deleteTask(params.id);
+export async function DELETE(request: Request, { params }: { params: Promise<{ id: string }> }) {
+    const { id } = await params;
+    const deleted = deleteTask(id);
     if (!deleted) {
         return NextResponse.json({ error: 'Task not found' }, { status: 404 });
     }

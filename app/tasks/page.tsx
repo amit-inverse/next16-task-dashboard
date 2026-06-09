@@ -12,7 +12,7 @@ export default function TaskPage() {
 
     const fetchTasks = async () => {
         try {
-            const res = await fetch('api/tasks');
+            const res = await fetch('/api/tasks');
             const data = await res.json();
             setTasks(data);
         } catch {
@@ -28,7 +28,7 @@ export default function TaskPage() {
 
     const handleAddTask = async (newTask: { title: string; description: string; status: Task['status'] }) => {
         try {
-            const res = await fetch('api/tasks', {
+            const res = await fetch('/api/tasks', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(newTask),

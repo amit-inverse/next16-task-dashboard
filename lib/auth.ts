@@ -37,8 +37,8 @@ export const getUserFromToken = (token: string) => {
 
 // Server-side helper to get current user
 export const getServerUser = async () => {
-    const cookieStore = cookies();
-    const token = (await cookieStore).get('token')?.value;
+    const cookieStore = await cookies();
+    const token = cookieStore.get('token')?.value;
     if (!token) return null;
     return getUserFromToken(token);
 }

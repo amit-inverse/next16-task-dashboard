@@ -14,7 +14,7 @@ export async function POST(request: Request) {
 
         const token = generateToken(email);
         const response = NextResponse.json({ success: true });
-        response.cookies.set('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', maxAge: 60 * 60 * 24 }); // 1 day
+        response.cookies.set('token', token, { httpOnly: true, secure: process.env.NODE_ENV === 'production', maxAge: 60 * 60 * 24, path: '/' }); // 1 day
         return response;
     } catch (error) {
         return NextResponse.json({ error: 'Validation error' }, { status: 400 });
